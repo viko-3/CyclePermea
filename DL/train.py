@@ -149,5 +149,5 @@ def train(model, train_loader, test_loader, val_loader, text_optimizer,other_opt
             f.write(f"Regression Loss: {regression_loss:.4f}, HELM Loss: {HELM_loss}, CL Loss: {CL_loss}\n")
             f.write(f"Epoch {epoch + 1}/{epochs}, Test Loss: {test_loss:.4f}, Test_R2_score: {test_R2_score: 4f}\n")
             f.write(f"Epoch {epoch + 1}/{epochs}, Val Loss: {val_loss:.4f}, Val_R2_score: {val_R2_score: 4f}\n")
-        torch.save(model.state_dict(), os.path.join(os.path.splitext(log_file)[0], 'best_model_{}.pth'.format(epoch)))
+        torch.save(model.state_dict(), os.path.join(os.path.splitext(log_file)[0], 'model_{}.pth'.format(epoch)))
 
