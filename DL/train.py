@@ -16,7 +16,6 @@ def train(model, train_loader, test_loader, val_loader, text_optimizer,other_opt
           HELM_criterion,
           model_config,
           device, epochs, writer, log_file):
-    best_test_loss = 1000
     for epoch in range(epochs):
         if epoch % 10 == 0:  # Every 10 epochs
             writer.flush()
@@ -140,10 +139,6 @@ def train(model, train_loader, test_loader, val_loader, text_optimizer,other_opt
         val_loss = mse(torch.cat(all_y_true), torch.cat(all_y_pred))
         print(f"Epoch {epoch + 1}/{epochs}, Val Loss: {val_loss:.4f}, R2_score: {val_R2_score:.4f}")
 
-        if (test_loss + 1 - test_R2_score) < best_test_loss:
-            torch.save(model.state_dict(), os.path.join(os.path.splitext(log_file)[0], 'best_model.pth'))
-            best_test_loss = test_loss + 1 - test_R2_score
-            print("current best model: test_loss:{:.4f},R2_score:{:.4f}".format(test_loss, test_R2_score))
 
 
         writer.add_scalar('val loss', val_loss, epoch + 1)
@@ -154,5 +149,5 @@ def train(model, train_loader, test_loader, val_loader, text_optimizer,other_opt
             f.write(f"Regression Loss: {regression_loss:.4f}, HELM Loss: {HELM_loss}, CL Loss: {CL_loss}\n")
             f.write(f"Epoch {epoch + 1}/{epochs}, Test Loss: {test_loss:.4f}, Test_R2_score: {test_R2_score: 4f}\n")
             f.write(f"Epoch {epoch + 1}/{epochs}, Val Loss: {val_loss:.4f}, Val_R2_score: {val_R2_score: 4f}\n")
+        torch.save(model.state_dict(), os.path.join(os.path.splitext(log_file)[0], 'best_model_{}.pth'.format(epoch)))
 
-        print("current best model:", best_test_loss)
