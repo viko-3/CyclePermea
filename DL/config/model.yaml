@@ -1,0 +1,1 @@
+data_yaml:  text_data_yaml: "./config/smi_dataset.yaml"model_yaml:  text_model_yaml: "./config/ChemBERTa.yaml"  use_text_info: True  use_fingerprint_info: True  use_CL_loss: True  use_HELM_loss: True  feature_cmb_type: attention #concate,cross_attention,attention,...
