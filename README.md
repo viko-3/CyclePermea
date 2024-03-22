@@ -2,7 +2,7 @@
 
 ## Introduction
 CyclePermea: Membrane Permeability Prediction of Cyclic Peptides with a Multi-Loss Fusion Network
-
+![model architecture](./model.pdf)
 
 ## Quickly start
 ### Main requirments
